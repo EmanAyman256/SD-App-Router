@@ -1,0 +1,50 @@
+<div class="stepsdemo-content">
+  <p-card>
+    <ng-template pTemplate="content">
+      <div class="field ">
+        <label for="formula">Formula: <span class="required-indicator" style="color:red">*</span></label>
+        <input #formula="ngModel" id="formula" type="text" maxlength="4" required pInputText
+          [(ngModel)]="createInformation.formula"
+          class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary "
+          [ngClass]="{ 'ng-dirty': (formula.invalid && submitted) || (formula.dirty && formula.invalid) }" />
+        <small *ngIf="(formula.invalid && submitted) || (formula.dirty && formula.invalid)" class="p-error">Formula is
+          required.</small>
+
+      </div>
+      <div class="field ">
+        <label for="description">Description: <span class="required-indicator" style="color:red">*</span></label>
+        <input #description="ngModel" id="description" type="text" required pInputText
+          [(ngModel)]="createInformation.description"
+          class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary"
+          [ngClass]="{ 'ng-dirty': (description.invalid && submitted) || (description.dirty && description.invalid) }" />
+        <small *ngIf="(description.invalid && submitted) || (description.dirty && description.invalid)"
+          class="p-error">Description is required.</small>
+      </div>
+      <div class="row formgrid grid">
+        <div class="field grid col">
+          <label for="numberOfParameters">NumberOfParams:<span class="required-indicator"
+              style="color:red">*</span></label>
+          <input #numberOfParameters="ngModel" id="numberOfParameters" type="number" required pInputNumber
+            [(ngModel)]="createInformation.numberOfParameters"
+            class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary "
+            [ngClass]="{ 'ng-dirty': (numberOfParameters.invalid && submitted) || (numberOfParameters.dirty && numberOfParameters.invalid) }"
+            (keyup)="validateNumberOfParameters()" [min]="1" />
+
+          <small
+            *ngIf="(numberOfParameters.invalid && submitted) || (numberOfParameters.dirty && numberOfParameters.invalid)"
+            class="p-error">
+            <ng-container *ngIf="createInformation.numberOfParameters <= 0 && createInformation.numberOfParameters === undefined">
+              NumberOfParameters is required.
+            </ng-container>
+          </small>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="footer">
+      <div class="flex justify-content-end flex-wrap">
+        <p-button label="Next Step" [disabled]="!isNumberOfParametersValid" (onClick)="nextPage()"
+          icon="pi pi-angle-right" [rounded]="true"  iconPos="right"></p-button>
+      </div>
+    </ng-template>
+  </p-card>
+</div>

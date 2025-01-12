@@ -1,0 +1,165 @@
+<!-- <p-messages position="top-left" *ngIf="successMessage" [(value)]="messages" [enableService]="false"></p-messages> -->
+<p-toast></p-toast>
+<!-- <div class="card mt-5">
+<form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <div class=" formgrid grid">
+        <div class="field col ">
+            <label for="modelServSpec" class="mb-2 md:mb-0">ModelServSpec:</label>
+            <div class="col-12 md:col-10 input-group">
+                <input id="modelServSpec" name="modelServSpec" required type="text" class="form-control" ngModel
+                    class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary ">
+            </div>
+        </div>
+        <div class="field col ">
+            <label for="blockingIndicator" class="mb-2 md:mb-0">BlockingIndicator:</label>
+            <div class="col-12 md:col-10 input-group">
+                <input id="blockingIndicator" name="blockingIndicator" type="checkbox" ngModel>
+            </div>
+        </div>
+        <div class="field col ">
+          <label for="serviceSelection" class="mb-2 md:mb-0">ServiceSelection:</label>
+            <div class="col-12 md:col-10 input-group">
+                <input id="serviceSelection" name="serviceSelection" type="checkbox" ngModel>
+            </div>
+        </div>
+    </div>
+    <p-card header="General Data:" class="row mt-2">
+        <div class="field grid">
+            <label for="description" class="col-12 mb-2 md:col-2 md:mb-0">Description:</label>
+            <div class="col-12 md:col-10 input-group">
+                <input id="description" name="description" required type="text" class="form-control" ngModel
+                    class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary">
+            </div>
+        </div>
+        <div class="field grid">
+            <label for="searchTerm" class="col-12 mb-2 md:col-2 md:mb-0">SearchTerm:</label>
+            <div class="col-12 md:col-10 input-group">
+                <input id="searchTerm" name="searchTerm" type="text" class="form-control" ngModel
+                    class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary">
+            </div>
+        </div>
+        <div class="field grid">
+            <label for="currency" class="col-12 mb-2 md:col-2 md:mb-0">Currency:</label>
+            <p-dropdown [options]="recordsCurrency" [(ngModel)]="selectedCurrency"  [ngModelOptions]="{standalone: true}"
+            optionValue="code" optionLabel="code"
+                [filter]="true" [filterFields]="['code','description']" [showClear]="true" placeholder="Select Currency">
+                <ng-template let-record pTemplate="item">
+                    <div class="flex align-items-center gap-2">
+                        <div>{{ record.code }}::{{ record.description }}</div>
+                    </div>
+                </ng-template>
+            </p-dropdown>
+        </div>
+    </p-card>
+    <div class=" text-center m-3">
+        <button pButton data-dismiss="modal" icon="pi pi-save" [disabled]="!f.valid">Add Model</button>
+    </div>
+</form>
+</div> -->
+
+<div class="card mt-5">
+    <form [formGroup]="modelForm" (ngSubmit)="onSubmit(modelForm)">
+        <div class="row m-2">
+            <div class="field col-12 md:col-3">
+                <label for="modelServSpec">ModelServ.Spec:</label>
+                <div class="input-group">
+                    <input id="modelServSpec" class="rounded-input" name="modelServSpec" type="text" formControlName="modelServSpec"
+                        class="form-control text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary ">
+                </div>
+            </div>
+            <div class="field col-12 md:col-3">
+                <label for="blockingIndicator">BlockingIndicator:</label>
+                <div class="input-group">
+                    <input id="blockingIndicator" name="blockingIndicator" type="checkbox" formControlName="blockingIndicator">
+                </div>
+            </div>
+            <div class="field col-12 md:col-3">
+                <label for="serviceSelection">ServiceSelection:</label>
+                <div class="input-group">
+                    <input id="serviceSelection" name="serviceSelection" type="checkbox" formControlName="serviceSelection">
+                </div>
+            </div>
+        </div>
+
+        <p-card header="General Data:" class="row mt-2">
+            <div class="field grid">
+                <label for="description" class="col-12 mb-2 md:col-2 md:mb-0">Description:<span style="color: red;">*</span></label>
+                <div class="col-12 md:col-10 input-group">
+                    <input id="description" class="rounded-input" name="description"  type="text"  formControlName="description"
+                        class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary">
+
+                        <div class="text-danger m-1"
+                *ngIf="modelForm.get('description')?.errors?.['required'] && modelForm.get('description')?.touched">
+                Description is required
+            </div>
+                </div>
+            </div>
+            <div class="field grid">
+                <label for="searchTerm" class="col-12 mb-2 md:col-2 md:mb-0">SearchTerm:</label>
+                <div class="col-12 md:col-10 input-group">
+                    <input id="searchTerm" class="rounded-input" name="searchTerm" type="text" formControlName="searchTerm"
+                        class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary">
+                </div>
+            </div>
+            <div class="field grid">
+                <label for="currency" class="col-12 mb-2 md:col-2 md:mb-0">Currency:</label>
+                <p-dropdown [options]="recordsCurrency"  formControlName="currencyCode"
+                optionValue="code" optionLabel="code"
+                    [filter]="true" [filterFields]="['code','description']" [showClear]="true" placeholder="Select Currency">
+                    <ng-template let-record pTemplate="item">
+                        <div class="flex align-items-center gap-2">
+                            <div>{{ record.code }}::{{ record.description }}</div>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+            </div>
+        </p-card>
+        
+       
+     
+        <div class=" text-center m-3">
+            <button pButton data-dismiss="modal" icon="pi pi-save" class="rounded-input" [disabled]="modelForm.invalid">Add Model</button>
+        </div>
+
+        <!-- <div class="row mb-3 align-items-start">
+            <div class="col">
+            <div class="col-auto">
+                <label for="modelServSpec" class="col-form-label">ModelServSpec:</label>
+              </div>
+              <div class="col-auto">
+                <input type="text" id="modelServSpec" class="form-control" >
+              </div>
+              </div>
+              <div class="col">
+              <div class="col-auto">
+                <label for="blockingIndicator" class="col-form-label">BlockingIndicator:</label>
+              </div>
+              <div class="col-auto">
+                <input type="checkbox" id="blockingIndicator" name="blockingIndicator" >
+              </div>
+              </div>
+              <div class="col">
+              <div class="col-auto">
+                <label for="serviceSelection" class="col-form-label">ServiceSelection:</label>
+              </div>
+              <div class="col-auto">
+                <input type="checkbox" id="serviceSelection" name="serviceSelection" >
+              </div>
+              </div>
+
+        </div> -->
+        <!-- <div class="mb-3">
+            <label for="blockingIndicator" class=" mb-2  md:mb-0">BlockingIndicator:</label>
+            <div class="col-12 md:col-10 input-group">
+                <input id="blockingIndicator" name="blockingIndicator" type="checkbox" ngModel>
+            </div>
+        </div>
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button> -->
+    </form>
+</div>
+
+<p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>

@@ -1,0 +1,80 @@
+<p-toast></p-toast>
+<p-table [value]="records" dataKey="formulaCode" styleClass="p-datatable-gridlines" editMode="row"
+    [tableStyle]="{'min-width': '50rem'}">
+    <ng-template pTemplate="caption">
+        <div class="flex align-items-center justify-content-between">
+            Formulas:
+            <button pButton (click)="navigateAddFormula()" icon="pi pi-plus" class="rounded-input" size="small" label="Add Formula"></button>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th fd-table-cell>Formula Code</th>
+            <th fd-table-cell>Description</th>
+            <th fd-table-cell>Actions</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-record let-editing="editing" let-ri="rowIndex">
+        <tr [pEditableRow]="record">
+            <td>
+                <p-cellEditor>
+                    <ng-template pTemplate="input">
+                        <input pInputText type="text" [(ngModel)]="record.formula">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                        {{record.formula}}
+                    </ng-template>
+                </p-cellEditor>
+            </td>
+            <td>
+                <p-cellEditor>
+                    <ng-template pTemplate="input">
+                        <input pInputText type="text" [(ngModel)]="record.description">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                        {{record.description}}
+                    </ng-template>
+                </p-cellEditor>
+            </td>
+            <td>
+                <button pButton pRipple type="button" class="p-button-rounded p-button-text p-button-danger"
+                    icon="pi pi-trash" severity="danger" (click)="deleteRecord(record)"></button>
+                <button pButton pRipple type="button" class="p-button-rounded p-button-text p-button-info"
+                    icon="pi pi-info-circle" severity="info" (click)="showDialog(record)"></button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>
+
+
+<div class="card flex justify-content-center">
+    <p-dialog header="Formula Details" [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }"
+        [draggable]="false" [resizable]="true" [maximizable]="true">
+        <ng-template pTemplate="header">
+            <div class="inline-flex align-items-center justify-content-center gap-2">
+                <span class="font-bold white-space-nowrap">Formula Details</span>
+
+            </div>
+        </ng-template>
+        <div class="m-0">
+            <div class="fs-6 mb-1"><span class="text-danger">Formula Code:</span>
+                {{selectedDetailsForDisplay?.formula}}
+            </div>
+            <div class="fs-6 mb-1"> <span class="text-danger">Description:</span>
+                {{selectedDetailsForDisplay?.description}}
+            </div>
+            <div class="fs-6 mb-1"> <span class="text-danger">NumberOfParameters:</span>
+                {{selectedDetailsForDisplay?.numberOfParameters}}
+            </div>
+            <div class="fs-6 mb-1"><span class="text-danger">Relation: </span>
+                {{selectedDetailsForDisplay?.formulaLogic}}
+
+            </div>
+        </div>
+        <ng-template pTemplate="footer">
+            <p-button icon="pi pi-check" (click)="visible = false" label="Ok" class="rounded-input" pAutoFocus [autofocus]="true"></p-button>
+        </ng-template>
+    </p-dialog>
+</div>

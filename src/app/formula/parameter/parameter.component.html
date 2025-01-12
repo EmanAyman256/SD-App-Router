@@ -1,0 +1,42 @@
+<p-card>
+    <ng-template pTemplate="content">
+      <div class="formgrid grid" *ngFor="let param of parameterInformationIterator; let index = index">
+        <div class="field col">
+          <label for="paramID{{ index }}">ParamID{{ index + 1 }}:<span class="required-indicator" style="color:red">*</span></label>
+          <input
+            [id]="'paramID' + index"
+            #paramID="ngModel"
+            type="text"
+            required
+            pInputText
+            [(ngModel)]="param.paramID"
+            class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+            [ngClass]="{ 'ng-dirty': (param.paramID.invalid && submitted) || (param.paramID.dirty && param.paramID.invalid) }"
+          />
+          <small *ngIf="(paramID.invalid && submitted) || (paramID.dirty && paramID.invalid)" class="p-error">ParamID{{ index + 1 }} is required.</small>
+        </div>
+        <div class="field col">
+          <label for="paramDescription{{ index }}">Param Description{{ index + 1 }}:<span class="required-indicator" style="color:red">*</span></label>
+          <input
+            [id]="'paramDescription' + index"
+            #paramDescription="ngModel"
+            type="text"
+            required
+            pInputText
+            [(ngModel)]="param.paramDescription"
+            class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+            [ngClass]="{ 'ng-dirty': (param.paramDescription.invalid && submitted) || (param.paramDescription.dirty && param.paramDescription.invalid) }"
+          />
+          <small *ngIf="(paramDescription.invalid && submitted) || (paramDescription.dirty && paramDescription.invalid)" class="p-error">ParamDescription{{ index + 1 }} is required.</small>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="footer">
+      <div class="flex justify-content-between flex-wrap">
+        <p-button label="Back" (onClick)="prevPage()" [rounded]="true"  icon="pi pi-angle-left"></p-button>
+        <p-button label="Next Step" (onClick)="nextPage()" [rounded]="true"  icon="pi pi-angle-right" iconPos="right"></p-button>
+      </div>
+    </ng-template>
+  </p-card>
+
+ 

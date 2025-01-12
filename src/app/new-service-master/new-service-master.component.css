@@ -1,0 +1,89 @@
+:host ::ng-deep .p-dialog .product-image {
+    width: 150px;
+    margin: 0 auto 2rem auto;
+    display: block;
+}
+.card {
+    padding: 1rem;
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+.table-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.table-actions p-multiSelect {
+    flex: 1 1 200px;
+    margin-right: 1rem;
+}
+
+.table-actions input[type="text"] {
+    flex: 1 1 200px;
+}
+
+@media screen and (max-width: 575px) {
+    .table-actions {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .table-actions p-multiSelect {
+        margin-bottom: 1rem;
+        margin-right: 0;
+    }
+
+    .table-actions input[type="text"] {
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 576px) and (max-width: 767px) {
+    .table-actions p-multiSelect {
+        flex: 1 1 150px;
+        margin-right: 0.5rem;
+    }
+
+    .table-actions input[type="text"] {
+        flex: 1 1 150px;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .table-actions p-multiSelect {
+        flex: 1 1 180px;
+        margin-right: 0.5rem;
+    }
+
+    .table-actions input[type="text"] {
+        flex: 1 1 180px;
+    }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+    .table-actions p-multiSelect {
+        flex: 1 1 200px;
+        margin-right: 0.5rem;
+    }
+
+    .table-actions input[type="text"] {
+        flex: 1 1 200px;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .table-actions p-multiSelect {
+        flex: 1 1 220px;
+        margin-right: 1rem;
+    }
+
+    .table-actions input[type="text"] {
+        flex: 1 1 220px;
+    }
+}

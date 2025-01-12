@@ -1,0 +1,121 @@
+
+<p-toast></p-toast>
+
+
+<div class="card mt-5">
+    <p-toolbar class="m-4">
+        <div class="p-toolbar-group-start ">
+            <h5>Models:</h5>
+        </div>
+        <div class="p-toolbar-group-end">
+            <button pButton icon="pi pi-plus" (click)="navigateModelAdd()">Add New Model</button>
+        </div>
+    </p-toolbar>
+    <p-table [value]="records"  dataKey="modelSpecCode" 
+    editMode="row" [tableStyle]="{'min-width': '50rem'}" [scrollable]="true" scrollHeight="400px">
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 4rem">
+                </th>
+                <th fd-table-cell>modelServ.Spec</th>
+                <th fd-table-cell>blockingIndicator</th>
+                <th fd-table-cell>ServiceSelection</th>
+                <th fd-table-cell>Description</th>
+                <th fd-table-cell>SearchTerm</th>
+                <th fd-table-cell>Currency</th>
+                <th fd-table-cell>Services</th>
+                <th fd-table-cell>Actions</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-record let-editing="editing" let-ri="rowIndex">
+            <tr [pEditableRow]="record">
+                <td>
+                </td>
+                <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText class="rounded-input" type="text" [(ngModel)]="record.modelServSpec">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{record.modelServSpec}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="checkbox" [(ngModel)]="record.blockingIndicator">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{record.blockingIndicator}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="checkbox" [(ngModel)]="record.serviceSelection">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{record.serviceSelection}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText class="rounded-input" type="text" [(ngModel)]="record.description">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{record.description}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText class="rounded-input" type="text" [(ngModel)]="record.searchTerm">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{record.searchTerm}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <p-dropdown [options]="recordsCurrency" [(ngModel)]="record.currencyCode"
+                                [ngModelOptions]="{standalone: true}" optionValue="code" optionLabel="code"
+                                [filter]="true" [filterFields]="['code','description']" [showClear]="true"
+                                placeholder= `{{record.currencyCode}}` [appendTo]="'body'">
+                                <ng-template let-record pTemplate="item">
+                                    <div class="flex align-items-center gap-2">
+                                        <div>{{ record.code }}::{{ record.description }}</div>
+                                    </div>
+                                </ng-template>
+                            </p-dropdown>
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{record.currencyCode}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td> <button pButton (click)="navigateServices(record)" icon="pi pi-external-link" size="small"
+                        label="Services"></button>
+                </td>
+                <td>
+                    <div class="flex align-items-center justify-content-center gap-2">
+                        <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(record)" class="p-button-rounded p-button-text"></button>
+                        <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(record.modelSpecCode,record)" class="p-button-rounded p-button-text p-button-success mr-2"></button>
+                        <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" (click)="onRowEditCancel(record, ri)" class="p-button-rounded p-button-text p-button-danger"></button>
+                        <button pButton pRipple type="button" class="p-button-rounded p-button-text p-button-danger" icon="pi pi-trash" severity="danger" (click)="deleteRecord(record)"></button>
+                    </div>
+                    <!-- <p-button icon="pi pi-trash" severity="danger" (click)="deleteRecord(record)"></p-button> -->
+                    <!-- <button pButton pRipple type="button" class="p-button-rounded p-button-text p-button-danger" icon="pi pi-trash" severity="danger" (click)="deleteRecord(record)"></button> -->
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+<p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>

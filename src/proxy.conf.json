@@ -1,0 +1,7 @@
+{
+    "/api/*": {
+        "target": "https://amwftwpkt.trial-accounts.ondemand.com/oauth2/token",
+        "secure": false,
+        "logLevel": "debug"
+    }
+}

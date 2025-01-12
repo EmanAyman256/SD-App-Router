@@ -1,0 +1,36 @@
+<p-card>
+    <ng-template pTemplate="content">
+        <label for="address">Formula Logic:</label>
+        <textarea #formulaLogic="ngModel" id="formulaLogic" type="text" [(ngModel)]="relationInformation.formulaLogic"
+            id="float-input" rows="5" pInputTextarea
+            class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"></textarea>
+           
+            <div class="row">
+                <div class="list-container">
+                  <p>Parameters You Entered:</p>
+                  <ul class="list-group list-group-horizontal">
+                    <a class="list-group-item m-1" style="cursor: pointer" *ngFor="let record of passedParamInfo"
+                    (click)="paramClick(record.paramID)"
+                    >
+                      {{ record.paramID}}
+                    </a>
+                  </ul>
+                </div>
+                <div class="list-container">
+                  <p>Operations:</p>
+                  <ul class="list-group list-group-horizontal">
+                    <a class="list-group-item m-1" style="cursor: pointer" *ngFor="let record of operations"
+                    (click)="operationClick(record)">
+                      {{ record}}
+                    </a>
+                  </ul>
+                </div>
+              </div>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <div class="flex justify-content-between flex-wrap">
+          <p-button label="Back" (onClick)="prevPage()" [rounded]="true"  icon="pi pi-angle-left"></p-button>
+            <p-button label="Next Step" (onClick)="nextPage()" [rounded]="true"  icon="pi pi-angle-right" iconPos="right"></p-button>
+        </div>
+    </ng-template>
+</p-card>

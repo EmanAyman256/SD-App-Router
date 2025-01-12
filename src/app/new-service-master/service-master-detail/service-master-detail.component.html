@@ -1,0 +1,106 @@
+<p-toast></p-toast>
+<form  >
+    <div class="row m-2">
+        <div class="field col-12 md:col-3">
+            <label for="id" style="color: rgb(11, 37, 139);">Service Number(ID):</label>
+            <input id="serviceNumberCode" name="serviceNumberCode" type="number"
+             [value]="this.selectedRecord.serviceNumberCode"
+              class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+              [disabled]="true">
+          </div>
+        <div class="field col-12 md:col-3">
+            <label for="code" style="color: rgb(11, 37, 139);">SearchTerm:<span style="color: red;">*</span></label>
+            <input id="searchTerm" name="searchTerm" required type="text" 
+            [value]="this.selectedRecord.searchTerm" [disabled]="true"
+                class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+        </div>
+        <div class="field col-12 md:col-3">
+            <label for="description" style="color: rgb(11, 37, 139);">Description: <span style="color: red;">*</span></label>
+            <input id="description" name="description" required type="text" 
+            [value]="this.selectedRecord.description" [disabled]="true"
+                class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+        </div>
+        <div class="field col-12 md:col-3">
+            <label for="serviceText" style="color: rgb(11, 37, 139);">Service Text:</label>
+            <input id="serviceText" name="serviceText"  type="text" 
+            [value]="this.selectedRecord.serviceText" [disabled]="true"
+                class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+
+        </div>
+    </div>
+    <div class="row m-2">
+        <div class="field col-12 md:col-6">
+            <label for="shortTextChangeAllowed" class="mr-1" style="color: rgb(11, 37, 139);">Short Text Change Allowed:</label>
+                <input id="shortTextChangeAllowed" name="shortTextChangeAllowed" [disabled]="true"
+                [value]="this.selectedRecord.shortTextChangeAllowed"
+                class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary">
+        </div>
+        <div class="field col-12 md:col-6">
+            <label for="deletionIndicator" class="mr-1" style="color: rgb(11, 37, 139);">Deletion Indicator:</label>
+                <input id="deletionIndicator" name="deletionIndicator" type="checkbox"  [disabled]="true"
+                [value]="this.selectedRecord.deletionIndicator" 
+                class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary" >
+        </div>
+    </div>
+
+    <div class="row m-2">
+        <div class="field col-12 md:col-6">
+            <label for="ServiceTypeCode" style="color: rgb(11, 37, 139);">Service Type:<span style="color: red;">*</span></label>
+            <input id="ServiceTypeCode" name="ServiceTypeCode"   [disabled]="true"
+            [value]="this.selectedRecord.serviceTypeCode"
+            class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary">
+        </div>
+        <div class="field col-12 md:col-6">
+            <label for="baseUnitOfMeasurement" style="color: rgb(11, 37, 139);" >Base UnitOfMeasurement:<span style="color: red;">*</span></label>
+            <input id="baseUnitOfMeasurement" name="baseUnitOfMeasurement"   [disabled]="true"
+                [value]="this.selectedRecord.baseUnitOfMeasurement"
+                class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary">
+        </div>
+    </div>
+
+    <h3>Control Data:</h3>
+    <hr>
+    <div class="row m-2">
+        <label for="numberToBeConverted" style="color: rgb(11, 37, 139);">Conversion:</label>
+        <div class="field  md:col-2">
+            <input id="numberToBeConverted" name="numberToBeConverted"  type="number"
+            [value]="this.selectedRecord.numberToBeConverted"  [disabled]="true"
+                class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary ">
+        </div>
+        <div class="field  md:col-4">
+            <!-- <label for="toBeConvertedUnitOfMeasurement" style="color: rgb(11, 37, 139);" >ToBe Converted UnitOfMeasurement:</label> -->
+            <input id="toBeConvertedUnitOfMeasurement" name="toBeConvertedUnitOfMeasurement"   [disabled]="true"
+            [value]="this.selectedRecord.toBeConvertedUnitOfMeasurement"
+            class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary">
+        </div>
+        <div class="field  md:col-2">
+            <input id="convertedNumber" name="convertedNumber"  type="number"
+            [value]="this.selectedRecord.convertedNumber" [disabled]="true"
+                class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary">
+        </div>
+        <div class="field  md:col-3">
+            <!-- <label for="defaultUnitOfMeasurement" style="color: rgb(11, 37, 139);"> Converted UnitOfMeasurement:</label> -->
+            <input id="defaultUnitOfMeasurement" name="defaultUnitOfMeasurement"   [disabled]="true"
+            [value]="this.selectedRecord.defaultUnitOfMeasurement"
+            class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary">
+        </div>
+    </div>
+    <div class="row m-2">
+        <div class="field col-12 md:col-6">
+            <label for="mainItem" class="mr-1" style="color: rgb(11, 37, 139);" >Main Item:</label>
+                <input id="mainItem" name="mainItem"  [value]="this.selectedRecord.mainItem"
+                [disabled]="true"
+                class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary" >
+        </div>
+        <div class="field col-12 md:col-6">
+            <label for="materialGroupCode" style="color: rgb(11, 37, 139);" > Material Grp:</label>
+            <input id="materialGroupCode" name="materialGroupCode"  [value]="this.selectedRecord.materialGroupCode"
+            [disabled]="true"
+            class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary" >
+        </div>
+    </div>
+    <div class=" text-center m-3">
+        <button pButton pRipple label="OK" (click)="navigateMainPage()" class="p-button-rounded m-2 "></button>
+    </div>
+</form>
+<p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>

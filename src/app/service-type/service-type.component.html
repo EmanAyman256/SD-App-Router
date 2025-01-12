@@ -1,0 +1,75 @@
+
+    <p-toast></p-toast>
+    <div class="card mt-5">
+    <p-table [value]="records"  dataKey="serviceTypeCode" styleClass="p-datatable-gridlines" editMode="row" [tableStyle]="{'min-width': '50rem'}"
+    [scrollable]="true" scrollHeight="400px">
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+                Service Types:
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th fd-table-cell>Code</th>
+                <th fd-table-cell>Description</th>
+                <th fd-table-cell>Created On</th> 
+                <!-- *appHasRole="['Admin']" -->
+                <th fd-table-cell>Actions</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-record let-editing="editing" let-ri="rowIndex">
+            <tr [pEditableRow]="record">
+                <td>
+                            {{record.serviceId}}
+                </td>
+                <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText class="rounded-input" type="text" [(ngModel)]="record.description">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{record.description}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td>
+                            {{record.lastChangeDate}}  
+                </td>
+                <td>
+                    <div class="flex align-items-center justify-content-center gap-2">
+                        <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(record)" class="p-button-rounded p-button-text"></button>
+                        <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(record.serviceTypeCode,record)" class="p-button-rounded p-button-text p-button-success mr-2"></button>
+                        <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" (click)="onRowEditCancel(record, ri)" class="p-button-rounded p-button-text p-button-danger"></button>
+                        
+                    <button pButton pRipple type="button" class="p-button-rounded p-button-text p-button-danger" icon="pi pi-trash" severity="danger" (click)="deleteRecord(record)"></button>
+                    </div>
+
+                    <!-- <p-button icon="pi pi-trash" severity="danger" (click)="deleteRecord(record)"></p-button> -->
+<!--                     
+                    <button pButton pRipple type="button" class="p-button-rounded p-button-text p-button-danger" icon="pi pi-trash" severity="danger" (click)="deleteRecord(record)"></button> -->
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="footer" class="m-3">
+            <tr>
+            <td>
+                <input name="serviceId" class="rounded-input" type="text" [(ngModel)]="newServiceType.serviceId">
+            </td>
+            <td>
+                <input name="description" class="rounded-input" type="text" [(ngModel)]="newServiceType.description">
+            </td>
+            <td>
+            </td>
+            <td>
+                <button pButton type="button" icon="pi pi-plus" class="ui-button-info rounded-input" label="Add"
+                    [disabled]="" (click)="addRow()">
+                </button>
+            </td>
+            </tr>
+            </ng-template>
+    </p-table>
+
+</div>
+
+    
+<p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>

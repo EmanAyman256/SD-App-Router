@@ -1,0 +1,170 @@
+<p-toast></p-toast>
+<div class="card mt-5">
+<form [formGroup]="serviceMasterForm" (ngSubmit)="onSubmit(serviceMasterForm)">
+    <div class="row m-2">
+        <div class="field col-12 md:col-3">
+            <label for="id">Service Number(ID):</label>
+            <input id="serviceNumberCode" [disabled]="true"  name="serviceNumberCode" type="number" formControlName="serviceNumberCode"
+                class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                 >
+
+        </div>
+        <div class="field col-12 md:col-3">
+            <label for="code">SearchTerm:<span style="color: red;">*</span></label>
+            <input id="searchTerm" name="searchTerm" type="text" formControlName="searchTerm"
+                class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+
+            <div class="text-danger m-1"
+                *ngIf="serviceMasterForm.get('searchTerm')?.errors?.['required'] && serviceMasterForm.get('searchTerm')?.touched">
+                Search Term is required
+            </div>
+        </div>
+        <div class="field col-12 md:col-3">
+            <label for="description">Description:<span style="color: red;">*</span></label>
+            <input id="description" name="description" formControlName="description"
+                class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+
+            <div class="text-danger m-1"
+                *ngIf="serviceMasterForm.get('description')?.errors?.['required'] && serviceMasterForm.get('description')?.touched">
+                Description is required
+            </div>
+        </div>
+        <div class="field col-12 md:col-3">
+            <label for="serviceText">Service Text:</label>
+            <input id="serviceText" name="serviceText" type="text" formControlName="serviceText"
+                class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+        </div>
+    </div>
+    <div class="row m-2">
+        <div class="field col-12 md:col-6">
+            <label for="shortTextChangeAllowed" class="mr-1">Short Text Change Allowed:</label>
+            <input id="shortTextChangeAllowed" name="shortTextChangeAllowed" type="checkbox"
+                formControlName="shortTextChangeAllowed">
+        </div>
+        <div class="field col-12 md:col-6">
+            <label for="deletionIndicator" class="mr-1">Deletion Indicator:</label>
+            <input id="deletionIndicator" name="deletionIndicator" type="checkbox" formControlName="deletionIndicator">
+        </div>
+    </div>
+
+    <div class="row m-2">
+        <div class="field col-12 md:col-6">
+            <!-- <ng-container> -->
+
+                <p-dropdown [options]="recordsServiceType" formControlName="serviceTypeCode" optionValue="serviceId"
+                    optionLabel="serviceId" [filter]="true" [filterFields]="['serviceId','description']"
+                    [showClear]="true" placeholder="Select Service Type" [virtualScroll]="true"
+                    [virtualScrollItemSize]="40">
+                    <ng-template let-record pTemplate="item">
+                        <div class="flex align-items-center gap-2">
+                            <div>{{ record.serviceId }}::{{ record.description }}</div>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+
+                <span style="color: red;margin: 5px;">*</span>
+            <!-- </ng-container> -->
+            <div class="text-danger m-1 w-20" style="width:15rem"
+                *ngIf="serviceMasterForm.get('serviceTypeCode')?.errors?.['required'] && serviceMasterForm.get('serviceTypeCode')?.touched">
+                ServiceType is required
+            </div>
+        </div>
+        <div class="field col-12 md:col-6">
+
+            <p-dropdown [options]="recordsMeasure" formControlName="baseUnitOfMeasurement"
+                optionValue="code" optionLabel="code" [filter]="true"
+                [filterFields]="['code','description']" [showClear]="true"
+                placeholder="Select Base UnitOfMeasure" [virtualScroll]="true" [virtualScrollItemSize]="40">
+                <ng-template let-record pTemplate="item">
+                    <div class="flex align-items-center gap-2">
+                        <!-- <div>{{ record.UnitOfMeasureLongName }}::{{ record.UnitOfMeasureName }}</div> -->
+                        <div>{{ record.code }}::{{ record.description }}</div>
+                    </div>
+                </ng-template>
+            </p-dropdown>
+
+            <span style="color: red;margin: 5px;">*</span>
+
+            <div class="text-danger m-1 w-20" style="width:19rem"
+                *ngIf="serviceMasterForm.get('baseUnitOfMeasurement')?.errors?.['required'] && serviceMasterForm.get('baseUnitOfMeasurement')?.touched">
+                BaseUnitOfMeasurement is required
+            </div>
+        </div>
+    </div>
+
+    <h3>Control Data:</h3>
+    <hr>
+    <label for="conversion">Conversion:</label>
+    <div class="form-control m-2">
+        <label for="conversion">ToBe Converted Number:</label>
+        <div class="formgrid grid">
+            <div class="field col-12 md:col-6">
+                <input id="numberToBeConverted" pInputNumber [min]="0" name="numberToBeConverted" type="number"
+                    formControlName="numberToBeConverted"
+                    class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary">
+            </div>
+            <div class="field col-12 md:col-6">
+                <p-dropdown [options]="recordsMeasure" formControlName="toBeConvertedUnitOfMeasurement"
+                    optionValue="code" optionLabel="code" [filter]="true"
+                    [filterFields]="['code','description']" [showClear]="true"
+                    placeholder="Select ToBeConverted UnitOfMeasure" [virtualScroll]="true"
+                    [virtualScrollItemSize]="40">
+                    <ng-template let-record pTemplate="item">
+                        <div class="flex align-items-center gap-2">
+                            <div>{{ record.code }}::{{ record.description }}</div>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+            </div>
+        </div>
+        <label for="conversion">Converted Number:</label>
+        <div class="formgrid grid">
+            <div class="field col-12 md:col-6">
+                <input id="convertedNumber" pInputNumber [min]="0" name="convertedNumber" type="number"
+                    formControlName="convertedNumber"
+                    class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary">
+            </div>
+            <div class="field col-12 md:col-6">
+                <p-dropdown [options]="recordsMeasure" formControlName="defaultUnitOfMeasurement"
+                    optionValue="code" optionLabel="code" [filter]="true"
+                    [filterFields]="['code','description']" [showClear]="true"
+                    placeholder="Select Converted UnitOfMeasure" [virtualScroll]="true" [virtualScrollItemSize]="40">
+                    <ng-template let-record pTemplate="item">
+                        <div class="flex align-items-center gap-2">
+                            <div>{{ record.code }}::{{ record.description }}</div>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+            </div>
+        </div>
+    </div>
+
+    <div class="row m-2">
+        <div class="field col-12 md:col-6">
+            <label for="mainItem" class="mr-1">Main Item:</label>
+            <input id="mainItem" name="mainItem" type="checkbox" formControlName="mainItem">
+        </div>
+        <div class="field col-12 md:col-6">
+            <ng-container>
+                <p-dropdown [options]="recordsMaterialGrp" formControlName="materialGroupCode" optionValue="code"
+                    optionLabel="code" [filter]="true" [filterFields]="['code','description']" [showClear]="true"
+                    placeholder="Select Material Group" [virtualScroll]="true" [virtualScrollItemSize]="40">
+                    <ng-template let-record pTemplate="item">
+                        <div class="flex align-items-center gap-2">
+                            <div>{{ record.code }}::{{ record.description }}</div>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+            </ng-container>
+
+        </div>
+    </div>
+    <div class=" text-center m-3">
+        <button pButton [disabled]="serviceMasterForm.invalid" class="rounded-input">{{ editMode ?
+            'Update' : 'Add' }}
+        </button>
+    </div>
+</form>
+</div>
+
+<p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>
