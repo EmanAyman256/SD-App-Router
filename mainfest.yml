@@ -1,10 +1,10 @@
 ---
 applications:
   - name: sd-app
-    path: approuter
-    buildpack: nodejs_buildpack
+    path: dist/btp-sd-app
+    buildpack: staticfile_buildpack
     instances: 1
-    memory: 100MB
+    memory: 512MB
     services:
       - name: my-xsuaa-service
       #- name: ias-srv
