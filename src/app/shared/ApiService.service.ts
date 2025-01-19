@@ -14,7 +14,8 @@ export class ApiService {
  // https://express-proxy-app.cfapps.us10-001.hana.ondemand.com/
  
   // private baseUrl = "https://express-proxy-app.cfapps.us10-001.hana.ondemand.com/api"
-  private baseUrl = "https://proxy-app.cfapps.us10-001.hana.ondemand.com/api"
+  // private baseUrl = "https://proxy-app.cfapps.us10-001.hana.ondemand.com/api"
+  private baseUrl="/btpsd"
   // private baseUrl = environment.production
   //   ? environment.apiUrl // Production URL
   //   : '/api';  // Development URL

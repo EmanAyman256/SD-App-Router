@@ -6,10 +6,10 @@ applications:
     instances: 1
     memory: 512MB
     services:
-      - name: my-xsuaa-service
-      #- name: ias-srv
+      - name: nodeuaa
+
     env:
-      TENANT_HOST_PATTERN: '^(.*)\\.cfapps.ap21.hana.ondemand.com\.com$'
+      TENANT_HOST_PATTERN: '^(.*)\\.cfapps.us10-001.hana.ondemand.com\.com$'
       #XS_SECURITY_FILE: "xs-security.json"
       #IAS_TENANT_URL: 'https://afeesahfw.trial-accounts.ondemand.com'
       #CLIENT_ID: 'bce94259-1871-4bb2-a181-69777cb71ba0'
